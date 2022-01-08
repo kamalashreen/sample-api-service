@@ -20,6 +20,13 @@ pipeline {
             }
           }
         }
+        stage('Secrets Scanner') {
+          steps {
+            container('trufflehog') {
+              sh "trufflehog ${GIT_URL}"
+            }
+          }
+        }
       }
     }
     stage('Build') {
